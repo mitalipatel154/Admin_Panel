@@ -1,0 +1,67 @@
+<%- include('header') %>
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h2 class="m-b-10">Edit Admin</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card p-3">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <form action="/update-category/<%= category._id %>" method="POST">
+
+                                    <div class="form-group">
+                                        <label>Category Name</label>
+
+                                        <input type="text"
+                                            name="cName"
+                                            value="<%= category.cName %>"
+                                            class="form-control">
+                                    </div>
+
+                                    <div class="form-group mt-3">
+                                        <label>Status</label>
+
+                                        <select name="status" class="form-control">
+                                            <option value="true"
+                                                <%= category.status ? 'selected' : '' %>>
+                                                Active
+                                            </option>
+
+                                            <option value="false"
+                                                <%= !category.status ? 'selected' : '' %>>
+                                                Inactive
+                                            </option>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit"
+                                            class="btn btn-primary mt-3">
+                                        Update Category
+                                    </button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<%- include('footer') %>

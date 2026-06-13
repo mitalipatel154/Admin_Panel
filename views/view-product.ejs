@@ -10,78 +10,79 @@
         <div class="card">
             <div class="card-body">
 
-                <table class="table table-bordered">
+                <div class="table-responsive">
 
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Name</th>
-                            <th>Category</th>
-                            <th>Sub Category</th>
-                            <th>Extra Category</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Status</th>
+                    <table class="table table-hover align-middle text-nowrap">
 
-                            <% if(user && (user.role === 'Super Admin' || user.role === 'Admin')) { %>
-                                <th>Action</th>
-                            <% } %>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <% productData.forEach(product => { %>
+                        <thead class="table">
                             <tr>
-
-                                <td>
-                                    <img src="/uploads/productImages/<%= product.productImage %>" width="70">
-                                </td>
-
-                                <td><%= product.productName %></td>
-
-                                <td>
-                                    <%= product.categoryId ? product.categoryId.cName : '' %>
-                                </td>
-
-                                <td>
-                                    <%= product.subCategoryId ? product.subCategoryId.subcName : '' %>
-                                </td>
-
-                                <td>
-                                    <%= product.extraCategoryId ? product.extraCategoryId.extracName : '' %>
-                                </td>
-
-                                <td>₹ <%= product.price %></td>
-
-                                <td><%= product.quantity %></td>
-
-                                <td>
-                                    <%= product.status ? 'Active' : 'Inactive' %>
-                                </td>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Sub Category</th>
+                                <th>Extra Category</th>
+                                <th>Price</th>
+                                <th>Quantity</th>
+                                <th>Status</th>
 
                                 <% if(user && (user.role === 'Super Admin' || user.role === 'Admin')) { %>
-                                <td>
-
-                                    <a href="/edit-product/<%= product._id %>" class="btn btn-warning btn-sm">
-                                        Edit
-                                    </a>
-
-                                    <a href="/delete-product/<%= product._id %>"
-                                       class="btn btn-danger btn-sm"
-                                       onclick="return confirm('Move this product to trash?')">
-                                        Delete
-                                    </a>
-
-                                </td>
+                                    <th>Action</th>
                                 <% } %>
-
                             </tr>
-                        <% }) %>
+                        </thead>
 
-                    </tbody>
+                        <tbody>
 
-                </table>
+                            <% productData.forEach(product => { %>
+                                <tr>
+
+                                    <td>
+                                        <img src="/uploads/productImages/<%= product.productImage %>" 
+                                             width="60" 
+                                             height="60"
+                                             style="object-fit: cover; border-radius: 6px;">
+                                    </td>
+
+                                    <td><%= product.productName %></td>
+
+                                    <td><%= product.categoryId ? product.categoryId.cName : '' %></td>
+
+                                    <td><%= product.subCategoryId ? product.subCategoryId.subcName : '' %></td>
+
+                                    <td><%= product.extraCategoryId ? product.extraCategoryId.extracName : '' %></td>
+
+                                    <td>₹ <%= product.price %></td>
+
+                                    <td><%= product.quantity %></td>
+
+                                    <td>
+                                        <span class="badge <%= product.status ? 'bg-success' : 'bg-danger' %>">
+                                            <%= product.status ? 'Active' : 'Inactive' %>
+                                        </span>
+                                    </td>
+
+                                    <% if(user && (user.role === 'Super Admin' || user.role === 'Admin')) { %>
+                                    <td>
+                                        <a href="/edit-product/<%= product._id %>" class="btn btn-warning btn-sm mb-1">
+                                            Edit
+                                        </a>
+
+                                        <a href="/delete-product/<%= product._id %>"
+                                           class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Move this product to trash?')">
+                                            Delete
+                                        </a>
+                                    </td>
+                                    <% } %>
+
+                                </tr>
+                            <% }) %>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
 
             </div>
         </div>

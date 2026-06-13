@@ -1,0 +1,59 @@
+<%- include('header') %>
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <h2>My Profile</h2>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="text-center mb-4">
+
+                    <img
+                        src="<%= adminData.avtar 
+                            ? '/uploads/adminImages/' + adminData.avtar
+                            : '/assets/images/user/avatar-2.jpg' %>"
+                        class="img-radius"
+                        width="150"
+                        height="150"
+                        style="object-fit:cover;border-radius:50%;"
+                    >
+
+                </div>
+
+                <table class="table table-bordered">
+
+                    <tr>
+                        <th>Name</th>
+                        <td><%= adminData.name %></td>
+                    </tr>
+
+                    <tr>
+                        <th>Email</th>
+                        <td><%= adminData.email %></td>
+                    </tr>
+
+                    <tr>
+                        <th>Gender</th>
+                        <td><%= adminData.gender %></td>
+                    </tr>
+
+                    <tr>
+                        <th>Role</th>
+                        <td><%= adminData.role %></td>
+                    </tr>
+
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<%- include('footer') %>

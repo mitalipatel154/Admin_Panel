@@ -29,7 +29,7 @@
             <div class="row align-items-center">
                 <div class="col-md-12">
                     <div class="card-body">
-                        <h4 class="mb-3 f-w-400">Verify</h4>
+                        <h4 class="mb-3 f-w-400">Login</h4>
                         <hr>
                         <form action="/checkLogin" method="POST">
 
@@ -61,7 +61,15 @@
                         </form>
 
                         <hr>
-                        <p class="mb-2 text-muted">Forgot password? <a href="/forgot-password" class="f-w-400">Reset</a></p>
+                        <div class="d-flex justify-content-between">
+                            <a href="/forgot-password" class="f-w-400 text-muted">
+                                Forgot Password?
+                            </a>
+
+                            <a href="/register" class="f-w-400 text-muted">
+                                Register
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,67 @@
+<%- include('header') %>
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <h2>Edit Extra Category</h2>
+            </div>
+        </div>
+
+        <div class="card p-3">
+            <div class="card-body">
+
+                <form action="/update-extracategory/<%= extraCategoryData._id %>" method="POST">
+
+                    <div class="form-group">
+                        <label>Extra Category Name</label>
+
+                        <input type="text"
+                            name="extracName"
+                            value="<%= extraCategoryData.extracName %>"
+                            class="form-control">
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label>Sub Category</label>
+
+                        <select name="subCategoryId" class="form-control">
+
+                            <% subCategoryData.forEach(sub => { %>
+                                <option value="<%= sub._id %>"
+                                    <%= sub._id.toString() === extraCategoryData.subCategoryId?.toString() ? 'selected' : '' %>>
+                                    <%= sub.subcName %>
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <label>Status</label>
+
+                        <select name="status" class="form-control">
+                            <option value="true" <%= extraCategoryData.status ? 'selected' : '' %>>
+                                Active
+                            </option>
+
+                            <option value="false" <%= !extraCategoryData.status ? 'selected' : '' %>>
+                                Inactive
+                            </option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">
+                        Update Extra Category
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<%- include('footer') %>

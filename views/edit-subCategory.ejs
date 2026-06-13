@@ -8,7 +8,7 @@
                 <div class="row align-items-center">
                     <div class="col-md-12">
                         <div class="page-header-title">
-                            <h2 class="m-b-10">Edit Category</h2>
+                            <h2 class="m-b-10">Edit Sub Category</h2>
                         </div>
                     </div>
                 </div>
@@ -21,14 +21,26 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <form action="/update-category/<%= category._id %>" method="POST">
+                                <form action="/update-subcategory/<%= subcategory._id %>" method="POST">
+                                    <div class="form-group mt-3">
+                                        <label>Category</label>
+
+                                        <select name="categoryId" class="form-control">
+                                            <% categoryData.forEach(cat => { %>
+                                                <option value="<%= cat._id %>"
+                                                    <%= cat._id.toString() === subcategory.categoryId?.toString() ? 'selected' : '' %>>
+                                                    <%= cat.cName %>
+                                                </option>
+                                            <% }) %>
+                                        </select>
+                                    </div>
 
                                     <div class="form-group">
-                                        <label>Category Name</label>
+                                        <label>Sub Category Name</label>
 
                                         <input type="text"
-                                            name="cName"
-                                            value="<%= category.cName %>"
+                                            name="subcName"
+                                            value="<%= subcategory.subcName %>"
                                             class="form-control">
                                     </div>
 
@@ -37,12 +49,12 @@
 
                                         <select name="status" class="form-control">
                                             <option value="true"
-                                                <%= category.status ? 'selected' : '' %>>
+                                                <%= subcategory.status ? 'selected' : '' %>>
                                                 Active
                                             </option>
 
                                             <option value="false"
-                                                <%= !category.status ? 'selected' : '' %>>
+                                                <%= !subcategory.status ? 'selected' : '' %>>
                                                 Inactive
                                             </option>
                                         </select>
@@ -50,7 +62,7 @@
 
                                     <button type="submit"
                                             class="btn btn-primary mt-3">
-                                        Update Category
+                                        Update Sub Category
                                     </button>
 
                                 </form>

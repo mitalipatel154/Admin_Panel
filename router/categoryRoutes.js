@@ -1,28 +1,29 @@
 const express = require('express');
 const route = express.Router();
 
+const passport = require('passport');
+const roleAuth = require('../middleware/roleAuth');
+
 const CategoryCtl = require('../controllers/categoryController');
 
-route.get('/add-category', CategoryCtl.addCategoryPage);
+route.get('/add-category',passport.setAuthenticated,roleAuth.checkRole('Super Admin','Admin'),CategoryCtl.addCategoryPage);
 
-route.post('/insert-category', CategoryCtl.insertCategory);
+route.post('/insert-category',passport.setAuthenticated,roleAuth.checkRole('Super Admin','Admin'),CategoryCtl.insertCategory);
 
-route.get('/view-category', CategoryCtl.viewCategory);
+route.get('/view-category', passport.setAuthenticated, CategoryCtl.viewCategory);
 
-route.get('/delete-category/:id', CategoryCtl.deleteCategory);
+route.get('/edit-category/:id', passport.setAuthenticated, CategoryCtl.editCategoryPage);
 
-route.get('/trash-category', CategoryCtl.trashCategory);
+route.post('/update-category/:id', passport.setAuthenticated, CategoryCtl.updateCategory);
 
-route.get('/restore-category/:id', CategoryCtl.restoreCategory);
+route.get('/delete-category/:id', passport.setAuthenticated, CategoryCtl.deleteCategory);
 
-route.get('/permanent-delete-category/:id', CategoryCtl.permanentDeleteCategory);
+route.get('/change-category-status/:id', passport.setAuthenticated, CategoryCtl.changeCategoryStatus);
 
-route.get('/edit-category/:id', CategoryCtl.editCategoryPage);
+route.get('/trash-category', passport.setAuthenticated, CategoryCtl.trashCategory);
 
-route.post('/update-category/:id', CategoryCtl.updateCategory);
+route.get('/restore-category/:id', passport.setAuthenticated, CategoryCtl.restoreCategory);
 
-route.get('/delete-category/:id', CategoryCtl.deleteCategory);
-
-route.get('/change-category-status/:id', CategoryCtl.changeCategoryStatus);
+route.get( '/permanent-delete-category/:id', passport.setAuthenticated, CategoryCtl.permanentDeleteCategory);
 
 module.exports = route;

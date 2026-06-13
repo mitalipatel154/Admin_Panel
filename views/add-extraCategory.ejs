@@ -1,0 +1,87 @@
+<%- include('header') %>
+
+    <section class="pcoded-main-container">
+        <div class="pcoded-content">
+
+            <div class="page-header">
+                <div class="page-block">
+                    <div class="row align-items-center">
+                        <div class="col-md-12">
+                            <div class="page-header-title">
+                                <h2 class="m-b-10">Add Category</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="card p-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <form action="/insert-extracategory" method="POST">
+
+                                        <div class="form-group">
+
+                                            <label>
+                                                Extra Category Name
+                                            </label>
+
+                                            <input
+                                                type="text"
+                                                name="extracName"
+                                                class="form-control"
+                                                required
+                                            >
+
+                                        </div>
+
+                                        <div class="form-group mt-3">
+
+                                            <label>
+                                                Select SubCategory
+                                            </label>
+
+                                            <select
+                                                name="subCategoryId"
+                                                class="form-control"
+                                                required
+                                            >
+
+                                                <option value="">
+                                                    Select SubCategory
+                                                </option>
+
+                                                <% subCategoryData.forEach(sub=>{ %>
+
+                                                    <option value="<%= sub._id %>">
+                                                        <%= sub.subcName %>
+                                                    </option>
+
+                                                <% }) %>
+
+                                            </select>
+
+                                        </div>
+
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary mt-3"
+                                        >
+                                            Add Extra Category
+                                        </button>
+
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <%- include('footer') %>

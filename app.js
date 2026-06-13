@@ -60,6 +60,18 @@ const categoryRoutes = require('./router/categoryRoutes');
 
 app.use('/', categoryRoutes);
 
+const subCategoryRoutes = require('./router/subCategoryRoutes');
+
+app.use('/', subCategoryRoutes);
+
+const extraCategoryRoutes = require('./router/extraCategoryRoutes');
+
+app.use('/',extraCategoryRoutes);
+
+const productRoutes = require('./router/productRoutes');
+
+app.use('/',productRoutes);
+
 app.listen(port, (err) => {
     if(err){
         console.log(err);

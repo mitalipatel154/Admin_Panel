@@ -47,6 +47,64 @@ module.exports.logout = async (req,res) => {
     }
 }
 
+module.exports.registerPage = (req,res)=>{
+    return res.render('register');
+}
+
+module.exports.registerAdmin = async (req,res)=>{
+    try{
+        let checkEmail = await Admin.findOne({
+            email:req.body.email
+        });
+
+        if(checkEmail){
+            req.flash( 'error', 'Email Already Exists' );
+            return res.redirect('/register');
+        }
+
+        let hashPassword = await bcrypt.hash( req.body.password, 10);
+
+        let fullName = req.body.fname + " " + req.body.lname;
+        await Admin.create({
+            name:fullName,
+            email:req.body.email,
+            password:hashPassword,
+            gender:req.body.gender,
+            role:'User',
+            avtar:req.file
+                ? req.file.filename
+                : ''
+        });
+        req.flash(
+            'success',
+            'Registration Successful'
+        );
+        return res.redirect('/');
+    }catch(err){
+        console.log(err);
+        req.flash(
+            'error',
+            'Registration Failed'
+        );
+        return res.redirect('/register');
+    }
+}
+
+module.exports.profilePage = async (req, res) => {
+    try {
+        let adminData = await Admin.findById(req.user._id);
+
+        return res.render('profile', {
+            adminData
+        });
+
+    } catch (err) {
+
+        console.log(err);
+        return res.redirect('back');
+    }
+}
+
 module.exports.dashboard = async (req, res) => {
     try {
         const adminData = req.user;
@@ -128,7 +186,7 @@ module.exports.deleteAdmin = async (req, res) => {
 
     } catch (err) {
         console.log(err);
-        req.flash('error', 'Unable to Delete Admin');
+        req.flash('error', 'Unable to move Admin to Trash');
         return res.redirect('/view-admin');
     }
 };

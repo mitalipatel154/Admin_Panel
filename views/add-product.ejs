@@ -1,0 +1,112 @@
+<%- include('header') %>
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <h4>Add Product</h4>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form action="/insertProduct" method="POST" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text"
+                               name="productName"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Price</label>
+                        <input type="number"
+                               name="price"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="number"
+                               name="quantity"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea name="description"
+                                  class="form-control"
+                                  rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Category</label>
+
+                        <select name="categoryId" class="form-control" required>
+                            <option value="">Select Category</option>
+
+                            <% categoryData.forEach(category => { %>
+                                <option value="<%= category._id %>">
+                                    <%= category.cName %>
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Sub Category</label>
+
+                        <select name="subCategoryId" class="form-control" required>
+                            <option value="">Select Sub Category</option>
+
+                            <% subCategoryData.forEach(sub => { %>
+                                <option value="<%= sub._id %>">
+                                    <%= sub.subcName %>
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Extra Category</label>
+
+                        <select name="extraCategoryId" class="form-control" required>
+                            <option value="">Select Extra Category</option>
+
+                            <% extraCategoryData.forEach(extra => { %>
+                                <option value="<%= extra._id %>">
+                                    <%= extra.extracName %>
+                                </option>
+                            <% }) %>
+
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Product Image</label>
+
+                        <input type="file"
+                               name="productImage"
+                               class="form-control">
+                    </div>
+
+                    <button type="submit"
+                            class="btn btn-primary">
+                        Add Product
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<%- include('footer') %>

@@ -1,0 +1,133 @@
+<%- include('header') %>
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h4>Edit Product</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+
+                <form action="/update-product/<%= product._id %>" 
+                      method="POST" 
+                      enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text"
+                               name="productName"
+                               value="<%= product.productName %>"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Description</label>
+                        <textarea name="description"
+                                  class="form-control"
+                                  rows="4"><%= product.description %></textarea>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Price</label>
+                        <input type="number"
+                               name="price"
+                               value="<%= product.price %>"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Quantity</label>
+                        <input type="number"
+                               name="quantity"
+                               value="<%= product.quantity %>"
+                               class="form-control"
+                               required>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Category</label>
+                        <select name="categoryId" class="form-control" required>
+                            <% categoryData.forEach(cat => { %>
+                                <option value="<%= cat._id %>"
+                                    <%= cat._id.toString() === product.categoryId?.toString() ? 'selected' : '' %>>
+                                    <%= cat.cName %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Sub Category</label>
+                        <select name="subCategoryId" class="form-control" required>
+                            <% subCategoryData.forEach(sub => { %>
+                                <option value="<%= sub._id %>"
+                                    <%= sub._id.toString() === product.subCategoryId?.toString() ? 'selected' : '' %>>
+                                    <%= sub.subcName %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Extra Category</label>
+                        <select name="extraCategoryId" class="form-control" required>
+                            <% extraCategoryData.forEach(extra => { %>
+                                <option value="<%= extra._id %>"
+                                    <%= extra._id.toString() === product.extraCategoryId?.toString() ? 'selected' : '' %>>
+                                    <%= extra.extracName %>
+                                </option>
+                            <% }) %>
+                        </select>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Current Image</label><br>
+                        <img src="/uploads/productImages/<%= product.productImage %>"
+                             width="100"
+                             style="border-radius:6px;">
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Change Image</label>
+                        <input type="file"
+                               name="productImage"
+                               class="form-control">
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label>Status</label>
+                        <select name="status" class="form-control">
+                            <option value="true" <%= product.status ? 'selected' : '' %>>
+                                Active
+                            </option>
+                            <option value="false" <%= !product.status ? 'selected' : '' %>>
+                                Inactive
+                            </option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">
+                        Update Product
+                    </button>
+
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<%- include('footer') %>

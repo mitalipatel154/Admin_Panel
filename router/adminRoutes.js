@@ -8,27 +8,37 @@ const Admin = require('../models/adminModel');
 
 const passport = require('passport');
 
-route.get("/",AdminCtl.loginpage);
+const roleAuth = require('../middleware/roleAuth');
 
-route.post("/checkLogin", passport.authenticate('local', { failureRedirect: '/' }), AdminCtl.checkLogin);
+route.get('/',AdminCtl.loginpage);
 
-route.get("/logout",passport.setAuthenticated,AdminCtl.logout);
+route.post('/checkLogin', passport.authenticate('local', { failureRedirect: '/' }), AdminCtl.checkLogin);
 
-route.get("/dashboard",passport.setAuthenticated,AdminCtl.dashboard);
+route.get('/logout',passport.setAuthenticated,AdminCtl.logout);
 
-route.get("/add-admin",passport.setAuthenticated,AdminCtl.addAdmin);
+route.get('/register', AdminCtl.registerPage);
 
-route.get("/view-admin",passport.setAuthenticated,AdminCtl.viewAdmin);
+route.post('/register-admin', Admin.uploadAdminImage, AdminCtl.registerAdmin);
 
-route.get("/deleteAdmin/:id", passport.setAuthenticated, AdminCtl.deleteAdmin);
+route.get('/profile',passport.setAuthenticated,AdminCtl.profilePage);
 
-route.get("/update-admin/:id", passport.setAuthenticated, AdminCtl.updateAdmin);
+route.get('/dashboard',passport.setAuthenticated,AdminCtl.dashboard);
 
-route.post("/insertAdminData",Admin.uploadAdminImage,AdminCtl.insertAdminData);
+route.get('/add-admin',passport.setAuthenticated,roleAuth.checkRole('Super Admin'),AdminCtl.addAdmin);
 
-route.post("/editAdminData/:id", passport.setAuthenticated, Admin.uploadAdminImage, AdminCtl.editAdminData);
+route.get('/view-admin',passport.setAuthenticated,AdminCtl.viewAdmin);
+
+route.get('/delete-admin/:id', passport.setAuthenticated, roleAuth.checkRole('Super Admin'), AdminCtl.deleteAdmin);
+
+route.get("/update-admin/:id",passport.setAuthenticated,roleAuth.checkRole('Super Admin', 'Admin'),AdminCtl.updateAdmin);
+
+route.post('/insertAdminData',passport.setAuthenticated,roleAuth.checkRole('Super Admin'),Admin.uploadAdminImage,AdminCtl.insertAdminData);
+
+route.post("/editAdminData/:id",passport.setAuthenticated, roleAuth.checkRole('Super Admin'),Admin.uploadAdminImage, AdminCtl.editAdminData);
 
 route.get('/trash-admin', passport.setAuthenticated, AdminCtl.trashAdmins);
+
+route.get('/trash-admin/:id',passport.setAuthenticated,roleAuth.checkRole('Super Admin'),AdminCtl.deleteAdmin);
 
 route.get('/restore-admin/:id', passport.setAuthenticated, AdminCtl.restoreAdmin);
 

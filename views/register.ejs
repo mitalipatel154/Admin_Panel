@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <title>Flat Able - Premium Admin Template by Phoenixcoded</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="">
+    <meta name="author" content="Phoenixcoded" />
+    <!-- Favicon icon -->
+    <link rel="icon" href="/assets/images/favicon.ico" type="image/x-icon">
+
+    <!-- vendor css -->
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+
+
+
+</head>
+
+<!-- [ auth-signin ] start -->
+<div class="auth-wrapper">
+    <div class="auth-content text-center">
+        <img src="/assets/images/logo.png" alt="" class="img-fluid mb-4">
+        <div class="card borderless">
+            <div class="row align-items-center">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <h4 class="mb-3 f-w-400">Register</h4>
+                        <hr>
+                        <form action="/register-admin" method="POST" enctype="multipart/form-data">
+
+                            <div class="form-group">
+                                <input type="text" name="fname" class="form-control" placeholder="First Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="lname" class="form-control" placeholder="Last Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="password" name="password" class="form-control" placeholder="Password"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <select name="gender" class="form-control" required>
+
+                                    <option value="">
+                                        Select Gender
+                                    </option>
+
+                                    <option value="male">
+                                        Male
+                                    </option>
+
+                                    <option value="female">
+                                        Female
+                                    </option>
+
+                                    <option value="other">
+                                        Other
+                                    </option>
+
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <input type="file" name="avtar" class="form-control" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block">
+                                Register
+                            </button>
+
+                        </form>
+
+                        <hr>
+                        <p class="mb-2 text-muted">Forgot password? <a href="/forgot-password" class="f-w-400">Reset</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- [ auth-signin ] end -->
+
+<!-- Required Js -->
+<script src="/assets/js/vendor-all.min.js"></script>
+<script src="/assets/js/plugins/bootstrap.min.js"></script>
+
+<script src="/assets/js/pcoded.min.js"></script>
+
+
+</body>
+
+</html>

@@ -33,9 +33,10 @@ const AdminSchema = new mongoose.Schema({
         type : String,
         required : true
     },
-    role : {
-        type : String,
-        required : true
+    role: {
+        type: String,
+        enum: ['Super Admin', 'Admin', 'User'],
+        default: 'User'
     },
     avtar: {      
         type: String,

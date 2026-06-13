@@ -1,0 +1,118 @@
+<%- include('header') %>
+
+<section class="pcoded-main-container">
+    <div class="pcoded-content">
+
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h2 class="m-b-10">View Sub-Category</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5>All Sub-Categorys</h5>
+                        <a href="/trash-subcategory" class="btn btn-primary btn-sm">Trash</a>
+                    </div>
+                    <div class="card-body table-border-style">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>SubCategory</th>
+                                        <th>Category</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    <% subCategoryData.forEach((sub,index)=>{ %>
+
+                                         <tr>
+
+                                            <td>
+                                                <%= index+1 %>
+                                            </td>
+
+                                            <td>
+                                                <%= sub.subcName %>
+                                            </td>
+
+                                            <td>
+                                                <%= sub.categoryId ? sub.categoryId.cName : 'No Category' %>
+                                            </td>                 
+                                            <td>
+                                                <% if(user && (user.role === 'Super Admin' || user.role === 'Admin')) { %>
+                                                    <label class="switch">
+                                                        <input
+                                                            type="checkbox"
+                                                            <%= sub.status ? 'checked' : '' %>
+                                                            onchange="window.location.href='/change-subcategory-status/<%= sub._id %>'"
+                                                        >
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                <% } else { %>
+                                                    <%= sub.status ? 'Active' : 'Inactive' %>
+                                                <% } %>
+                                            </td>                                     
+                                            <td>
+                                                <% if(user && (user.role === 'Super Admin' || user.role === 'Admin')) { %>
+                                                    <a href="/edit-subcategory/<%= sub._id %>"
+                                                    class="btn btn-warning btn-sm">
+                                                        Edit
+                                                    </a>
+                                                    <a href="/delete-subcategory/<%= sub._id %>"
+                                                        class="btn btn-danger btn-sm">
+                                                            Delete
+                                                    </a>
+                                                <% } %>
+                                            </td>
+                                        </tr>
+
+                                    <% }) %>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<script>
+function deleteSubCategory(id){
+
+    Swal.fire({
+        title: 'Are you sure?',
+        text: 'You want to delete this sub-category?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Yes, Delete It!'
+    }).then((result) => {
+
+        if(result.isConfirmed){
+            window.location.href = '/delete-subcategory/' + id;
+        }
+
+    });
+
+}
+</script>
+<%- include('footer') %>

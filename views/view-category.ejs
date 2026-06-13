@@ -20,7 +20,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5>All Categorys</h5>
-                        <a href="/trash-admin" class="btn btn-primary btn-sm">Trash</a>
+                        <a href="/trash-category" class="btn btn-primary btn-sm">Trash</a>
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
@@ -41,25 +41,30 @@
                                             <td><%= category.cName %></td>
 
                                             <td>
-                                                <label class="switch">
-                                                    <input
-                                                        type="checkbox"
-                                                        <%= category.status ? 'checked' : '' %>
-                                                        onchange="window.location.href='/change-category-status/<%= category._id %>'"
-                                                    >
-                                                    <span class="slider"></span>
-                                                </label>
+                                                <% if(user.role === 'User'){ %>
+                                                <%= category.status ? 'Active' : 'Inactive' %>
+                                                <% } else { %>
+                                                    <label class="switch">
+                                                        <input
+                                                            type="checkbox"
+                                                            <%= category.status ? 'checked' : '' %>
+                                                            onchange="window.location.href='/change-category-status/<%= category._id %>'"
+                                                        >
+                                                        <span class="slider"></span>
+                                                    </label>
+                                                <% } %>
                                             </td>
                                             <td>
-                                                <a href="/edit-category/<%= category._id %>" 
-                                                   class="btn btn-sm btn-warning mr-1">
-                                                    Edit
-                                                </a>
-                                                <a href="/delete-category/<%= category._id %>" 
-                                                   class="btn btn-sm btn-danger"
-                                                   onclick="return confirm('Are you sure you want to delete this admin?')">
-                                                    Delete
-                                                </a>
+                                                <% if(user && (user.role === 'Super Admin' || user.role === 'Admin')) { %>
+                                                    <a href="/edit-category/<%= category._id %>"
+                                                    class="btn btn-warning btn-sm">
+                                                        Edit
+                                                    </a>
+                                                    <a href="/delete-category/<%= category._id %>"
+                                                    class="btn btn-danger btn-sm">
+                                                        Delete
+                                                    </a>
+                                                <% } %>
                                             </td>
                                         </tr>
 

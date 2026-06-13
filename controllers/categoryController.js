@@ -89,16 +89,17 @@ module.exports.deleteCategory = async (req, res) => {
     }
 };
 
-module.exports.trashCategory = async (req, res) => {
+module.exports.trashCategory = async (req,res)=>{
 
-    const trashData = await Category.find({
-        isDeleted: true
+    let trashData = await Category.find({
+        isDeleted:true
     });
 
-    return res.render('trash-category', {
-        trashData
+    return res.render('trash',{
+        trashData,
+        type:'category'
     });
-};
+}
 
 module.exports.restoreCategory = async (req, res) => {
 
